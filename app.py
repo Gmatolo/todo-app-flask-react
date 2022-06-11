@@ -20,6 +20,10 @@ class Todo(db.Model):
     completed= db.Column(db.Integer, default=0)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
+    #return a string every time we created a new element
+    def __repr__(self):
+        return '<Task %r> % self.id'
+
 @app.route('/')
 def homepage():
     return render_template("index.html")
