@@ -1,5 +1,6 @@
+import re
 from sqlite3 import dbapi2
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request, url_for, request, redirect
 #database adapter
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, datetime
@@ -24,9 +25,21 @@ class Todo(db.Model):
     def __repr__(self):
         return '<Task %r> % self.id'
 
-@app.route('/')
+@app.route('/', methods=['POST','GET'])
 def homepage():
-    return render_template("index.html")
+    if request.method=='POST':
+        task_content = request.form['content']
+        new_task = Todo(content=task_content)
+
+        try:
+            db.session.add(new_task)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "There was an error"
+    else:
+        tasks = Todo.query.order_by(Todo.date_created).all()
+        return render_template('index.html', tasks = tasks)
 
 if __name__ == "__main__":
     app.run(debug=True)
