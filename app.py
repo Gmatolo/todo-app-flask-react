@@ -50,14 +50,14 @@ def delete(id):
     except:
         return "There was an error deleting the task"
         
-# @app.route('/update/<int:id>',  methods=['POST','GET'])
-# def update(id):
-#     recent_update = db.Todo.get_or_404(id)
-#     try:
-#         db.session.commit(recent_update)
-#         return redirect('/')
-#     else:
-#         return "There was an error updating the task"
+@app.route('/update/<int:id>',  methods=['POST','GET'])
+def update(id):
+    recent_update = db.Todo.get_or_404(id)
+    try:
+        db.session.commit(recent_update)
+        return redirect('/')
+    else:
+        return "There was an error updating the task"
 
 
 
