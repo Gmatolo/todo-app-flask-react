@@ -56,8 +56,18 @@ def update(id):
     try:
         db.session.commit(recent_update)
         return redirect('/')
-    else:
+    except:
         return "There was an error updating the task"
+
+
+@app.route('/login/')
+def user(userid):
+    try:
+        pass
+    except:
+        pass
+    
+
 
 
 
