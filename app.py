@@ -66,7 +66,14 @@ def user(userid):
         pass
     except:
         pass
-    
+
+@app.route('/logout/')
+def user(userid):
+    try:
+        pass
+    except:
+        pass
+
 
 
 
